@@ -1,19 +1,20 @@
-import "./App.css";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/signup";
+import Signup from "./pages/Signup";
+import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
 
-function App() {
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />}>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         {/* <Route path="*" element={<NoPage />} /> */}
-      </Route>
-    </Routes>
-  </BrowserRouter>;
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;
