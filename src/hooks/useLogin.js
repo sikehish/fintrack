@@ -26,7 +26,7 @@ function useLogin() {
       if (!checkEmail.length) throw new Error("Email not registered");
       const res = await signInWithEmailAndPassword(auth, email, password);
       dispatch({ type: "LOGIN", payload: res.user });
-      if (!res) throw new Error("Invalid password");
+      // if (!res) throw new Error("Invalid password");
       console.log(res.user);
       if (!isCancelled) {
         setError(false);
@@ -35,10 +35,11 @@ function useLogin() {
       }
     } catch (err) {
       if (!isCancelled) {
-        console.log(err);
+        console.log(JSON.stringify(err));
         setIsPending(false);
         setIsSucc(false);
-        setError(err.message);
+        if (err.code == "auth/wrong-password") setError("Incorrect password");
+        else setError(err.message);
       }
     }
   };

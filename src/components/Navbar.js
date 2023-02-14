@@ -27,10 +27,13 @@ const Navbar = () => {
 
           {user && (
             <>
-              <span>Welcome, {user.displayName}</span>
-              <button className="btn" onClick={logout}>
-                Logout
-              </button>
+              <Link to="/expenses">Expenses</Link>
+              <div className="nav-logout">
+                <span>Welcome,{user.displayName}!</span>
+                <button className="btn" onClick={logout}>
+                  Logout
+                </button>
+              </div>
             </>
           )}
         </div>

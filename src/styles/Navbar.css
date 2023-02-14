@@ -37,3 +37,15 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.nav-logout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.nav-logout span {
+  color: white;
+}
