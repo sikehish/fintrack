@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 // import "../styles/Login.css";
 
@@ -7,12 +8,30 @@ function Login() {
   const [pw, setPw] = useState("");
   const [name, setName] = useState("");
   const [cpw, setCpw] = useState("");
-  const { signup, error, isPending } = useSignup();
+  const { signup, error, isPending, isSucc } = useSignup();
+  // const [succMsg, setSuccMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(name, email, pw, cpw);
+    // if (!error) navigate("/");
   };
+
+  useEffect(() => {
+    if (isSucc) {
+      setEmail("");
+      setName("");
+      setPw("");
+      setCpw("");
+      // setSuccMsg("Account created successfully!");
+      const pathname = "/login";
+      const myTimeout = setTimeout(() => {
+        if (window.location.pathname == "/signup") navigate(pathname);
+      }, 1500);
+      if (window.location.pathname == pathname) clearTimeout(myTimeout);
+    }
+  }, [isSucc]);
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
@@ -55,6 +74,7 @@ function Login() {
         {isPending ? "Loading" : "Signup"}
       </button>
       {error && <p>{error}</p>}
+      {isSucc && <p>{isSucc}</p>}
     </form>
   );
 }
