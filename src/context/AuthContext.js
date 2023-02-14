@@ -1,17 +1,13 @@
-import { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
 export const AuthContext = createContext();
 
-const reducer = () => {
+const reducer = (state, action) => {
   switch (action.type) {
-    // if (action.type === "SIGNUP") {
-    //     return { user: null }; //NOT IMPLEMENTING AUTO REGISTRATION ON SIGNUP
-    //   } else if (action.type === "LOGIN") {
-    //     return { user: action.payload };
-    //   } else if (action.type === "LOGOUT") {
-    //     return { user: null };
-    //   } else return state;
-
+    case "LOGIN":
+      return { ...state, user: action.payload };
+    case "LOGOUT":
+      return { ...state, user: null };
     default:
       return state;
   }
@@ -20,7 +16,10 @@ const reducer = () => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem("user")) || null,
+    authIsReady: false,
   });
+
+  console.log("Auth context", state);
 
   return (
     <AuthContext.Provider value={{ dispatch, ...state }}>

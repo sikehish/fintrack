@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 // import "../styles/Login.css";
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [name, setName] = useState("");
@@ -78,4 +78,4 @@ function Login() {
     </form>
   );
 }
-export default Login;
+export default Signup;

@@ -5,7 +5,7 @@ import {
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
 // import { collection, query, where } from "firebase/firestore";
-import React from "react";
+import React, { useEffect } from "react";
 import validator from "validator";
 import { useState } from "react";
 
@@ -13,6 +13,7 @@ function useSignup() {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [isSucc, setIsSucc] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false); //Used in cleanUp function
 
   const signup = async (name, email, password, cpassword) => {
     setError(null);
@@ -33,16 +34,28 @@ function useSignup() {
       await updateProfile(auth.currentUser, {
         displayName: name,
       });
-      setError(false);
-      setIsPending(false);
-      setIsSucc("Account created successfully");
+      if (!isCancelled) {
+        setError(false);
+        setIsPending(false);
+        setIsSucc("Account created successfully");
+      }
     } catch (err) {
-      console.log(err);
-      setIsPending(false);
-      setIsSucc(false);
-      setError(err.message);
+      if (!isCancelled) {
+        console.log(err);
+        setIsPending(false);
+        setIsSucc(false);
+        setError(err.message);
+      }
     }
   };
+
+  useEffect(() => {
+    setIsCancelled(false);
+    return () => {
+      setIsCancelled(true);
+    };
+  }, []);
+
   return { signup, isPending, error, isSucc };
 }
 

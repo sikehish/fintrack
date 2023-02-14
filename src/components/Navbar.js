@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "../styles/Navbar.css";
 import logo from "../assets/logo.svg";
+import useLogout from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
+  const { logout, isPending, error } = useLogout();
+  const { user } = useAuthContext();
+
   return (
     <>
       <nav className="navbar">
@@ -12,8 +17,22 @@ const Navbar = () => {
         </div>
         <div className="nav-links">
           <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+
+          {!user && (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </>
+          )}
+
+          {user && (
+            <>
+              <span>Welcome, {user.displayName}</span>
+              <button className="btn" onClick={logout}>
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </nav>
     </>
