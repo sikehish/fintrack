@@ -7,7 +7,11 @@ import List from "./List";
 
 function Expenses() {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection("expenses");
+  const { documents, error } = useCollection("expenses", [
+    "uid",
+    "==",
+    user.uid,
+  ]);
 
   return (
     <div className="container">
