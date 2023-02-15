@@ -6,6 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import React from "react";
 import Expenses from "./pages/expenses/Expenses";
 import { useAuthContext } from "./hooks/useAuthContext";
+import Footer from "./components/Footer";
 
 export default function App() {
   const { user, authIsReady } = useAuthContext();
@@ -31,6 +32,7 @@ export default function App() {
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       )}
     </div>
