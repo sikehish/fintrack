@@ -5,12 +5,17 @@
   margin: 60px auto;
 }
 
+.content {
+  padding-right: 30px;
+}
+
 .list {
   padding-right: 30px;
 }
 .side {
   color: #01fffe;
   padding-left: 30px;
+  margin-left: 20px;
 }
 
 .side form {
@@ -63,4 +68,46 @@
 
 .side aside li {
   margin: 10px;
+}
+
+.expenses {
+  margin: 0;
+  /* margin-right: 1rem; */
+}
+
+.expenses li {
+  margin: 30px auto;
+  border: 1px solid #f2f2f2;
+  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.1);
+  /* background-color: rgb(194, 185, 185); */
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid #01fffe;
+}
+.expenses .name {
+  color: #292929;
+  font-size: 1.4em;
+}
+.expenses .amount {
+  margin-left: auto;
+  margin-right: 40px;
+  color: #292929;
+  font-weight: bold;
+  font-size: 1.6em;
+}
+.expenses button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ddd;
+  color: #777;
+  border: none;
+  padding: 12px 8px;
+  text-align: center;
+  line-height: 0;
+  font-size: 0.9em;
+  cursor: pointer;
 }
